@@ -79,10 +79,6 @@ public class Main {
             stack.add(remainder);
         }
 
-
-
-
-
         //now append all the numbers to a final string
         StringBuilder sb = new StringBuilder();
         sb.append("the number is [");
@@ -105,6 +101,5 @@ public class Main {
         }
 
         return res;
-
     }
 }
