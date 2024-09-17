@@ -1,6 +1,28 @@
 //by julian and devin
 import java.util.*;
 
+/*
+what this program does:
+    -takes the user input for the base they want to convert from and to.
+    -takes the number the user wants to convert in their desired base
+    -parses each "digit" the user inputs, adds them to a list in that order,
+    then calls a method to convert to the target base
+
+    convert method:
+        -converts the number to base 10 first by going through each digit
+        starting with the most significant digit to the least significant digit,
+        adding each digit's value multiplied by the initial base raised to the
+        current position
+
+        -after the value is found in base 10, we convert to the user's desired base
+        by using the cake method to find all the remainders and keep dividing the
+        value by the final base until it is 0.
+        -we keep track of each remainder of the division by adding each remainder
+        to a stack since we want the last remainder we get to be the first digit
+
+        -once we have all the remainders, we append each one to a stringbuilder
+        and return a final string containing the number in the desired base
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -47,35 +69,25 @@ public class Main {
             placeVal--;
         }
 
-        ArrayList<Integer> res = new ArrayList<>();
-        int temp = 1;
-        placeVal = 0;
+        Stack<Integer> stack = new Stack<>();
 
-        //then we find the highest place value that the number can reach in base 10
-        while (valBase10 >= temp) {
-            temp *= toBase;
-            placeVal++;
+        //cake method to convert from base 10 to any other base
+        //we're using stack because it's last in first out
+        while (valBase10 > 0) {
+            int remainder = valBase10 % toBase;
+            valBase10 /= toBase;
+            stack.add(remainder);
         }
-        placeVal--;
 
-        int cur = pow(toBase, placeVal);
-//        System.out.println(valBase10 + " " + placeVal);
 
-        while (placeVal >= 0) {
-            int multiplier = valBase10 / cur; //how many times the cur can fit in the
-                                                    //number in base 10
-            res.add(multiplier);
-            valBase10 -= multiplier * cur; //subtract from the total
 
-            placeVal--; //move place value to the right
-            cur /= toBase;
-        }
+
 
         //now append all the numbers to a final string
         StringBuilder sb = new StringBuilder();
         sb.append("the number is [");
-        for (int num : res) {
-            sb.append(String.valueOf(num));
+        while (!stack.isEmpty()) {
+            sb.append(stack.pop());
             sb.append(" ");
         }
         sb.delete(sb.length()-1, sb.length());
