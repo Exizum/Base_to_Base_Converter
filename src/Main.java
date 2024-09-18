@@ -1,4 +1,5 @@
 //by julian and devin
+import java.sql.SQLOutput;
 import java.util.*;
 
 /*
@@ -44,7 +45,7 @@ public class Main {
         int toBase = s.nextInt();
 
         StringTokenizer st = new StringTokenizer(fromNum); //this parses each "digit" in the
-                                                            //input stream
+        //input stream
         ArrayList<Integer> fromList = new ArrayList<>();
 
 
@@ -54,6 +55,8 @@ public class Main {
 
         String toNum = convert(fromList, fromBase, toBase);
         System.out.println(toNum);
+        System.out.println("this number is formatted with each place value separated by a space. \n" +
+                "for example 10 12 (base 17) = 10 * 17^1 + 11 * 17^0 = 181");
 
 
         //3 5 10 12
@@ -92,7 +95,7 @@ public class Main {
 
     }
 
-    public static int pow(int x, int y) { //this return x ^ y
+    public static int pow(int x, int y) { //this return x ^ y. Math.pow only uses doubles
         int res = 1;
 
         while (y > 0) {
