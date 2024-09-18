@@ -1,11 +1,13 @@
 //by julian and devin
-import java.sql.SQLOutput;
 import java.util.*;
 
 /*
 what this program does:
     -takes the user input for the base they want to convert from and to.
     -takes the number the user wants to convert in their desired base
+    -the number does not use any special characters since we want to convert to any base like
+    base 1000000 for example, so we can't continue using special characters for that number. Instead
+    each "digit" is separated by spaces.
     -parses each "digit" the user inputs, adds them to a list in that order,
     then calls a method to convert to the target base
 
@@ -33,7 +35,7 @@ public class Main {
         int fromBase = s.nextInt();
 
         System.out.println("enter the number you want to convert from" +
-                " with each place value in base 10 separated by spaces. ");
+                " with each place value in base 10 separated by spaces. NO SPECIAL CHARACTERS. ONLY NUMBERS.");
         System.out.println("for example 2 19 (base 20) = 2 * 20^1 + 19" +
                 " * 20^0 = 59 (base 10)");
         s = new Scanner(System.in);
@@ -55,7 +57,7 @@ public class Main {
 
         String toNum = convert(fromList, fromBase, toBase);
         System.out.println(toNum);
-        System.out.println("this number is formatted with each place value separated by a space. \n" +
+        System.out.println("this number is formatted with each place value separated by a space without special characters. \n" +
                 "for example 10 12 (base 17) = 10 * 17^1 + 11 * 17^0 = 181");
 
 
